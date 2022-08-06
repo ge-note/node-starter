@@ -1,0 +1,7 @@
+{
+  "name": "node-starter",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "echo \"no test\" && exit 1"
+  }
+}
