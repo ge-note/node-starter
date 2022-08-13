@@ -9,6 +9,8 @@
     "nodemon": "^2.0.19"
   },
   "dependencies": {
-    "minimist": "^1.2.6"
+    "chalk": "^4.1.2",
+    "minimist": "^1.2.6",
+    "progress": "^2.0.3"
   }
 }
