@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "chalk": "^4.1.2",
+    "inquirer": "^8.0.0",
     "minimist": "^1.2.6",
     "progress": "^2.0.3"
   }
