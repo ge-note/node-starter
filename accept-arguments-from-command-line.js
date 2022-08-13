@@ -3,7 +3,7 @@
  */
 // 获取所有参数
 process.argv.forEach((val, index) => {
-	console.log(`${index}: ${val}`);
+  console.log(`${index}: ${val}`);
 });
 
 // 排除前两项后的参数

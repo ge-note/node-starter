@@ -8,12 +8,12 @@ const port = 3000;
 
 // 创建 HTTP 服务器
 const server = http.createServer((req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Content-Type', 'text/plain');
-	res.end('Run Node.js scripts from the command line\n');
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Run Node.js scripts from the command line\n');
 });
 
 // 监听指定主机和端口
 server.listen(port, hostname, () => {
-	console.log(`Server running at http://${hostname}:${port}/`);
+  console.log(`Server running at http://${hostname}:${port}/`);
 });

@@ -24,7 +24,7 @@ console.count('X 的值为 ' + countX + ' 且已经检查了几次？');
 const oranges = ['橙子', '橙子'];
 
 oranges.forEach((fruit) => {
-	console.count(fruit);
+  console.count(fruit);
 });
 
 /**
@@ -39,9 +39,9 @@ fn2();
  */
 const doSomething = () => console.log('计算耗时');
 const measureDoingSomething = () => {
-	console.time('doSomething()');
-	doSomething();
-	console.timeEnd('doSomething()');
+  console.time('doSomething()');
+  doSomething();
+  console.timeEnd('doSomething()');
 };
 measureDoingSomething(); // 计算耗时 doSomething(): 0.013ms
 
@@ -61,11 +61,11 @@ console.log(chalk.green('你好'));
  */
 const ProgressBar = require('progress');
 const bar = new ProgressBar(':bar', {
-	total: 30,
+  total: 30,
 });
 const timer = setInterval(() => {
-	bar.tick();
-	if (bar.complete) {
-		clearInterval(timer);
-	}
+  bar.tick();
+  if (bar.complete) {
+    clearInterval(timer);
+  }
 }, 100);

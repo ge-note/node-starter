@@ -7,15 +7,15 @@ const foo = () => console.log('foo');
 const bar = () => console.log('bar');
 
 const test = () => {
-	console.log('test');
+  console.log('test');
 
-	setTimeout(foo, 0);
+  setTimeout(foo, 0);
 
-	new Promise((resolve, reject) => resolve('应该在 bar 之后、foo 之前')).then(
-		(resolve) => console.log(resolve)
-	);
+  new Promise((resolve, reject) => resolve('应该在 bar 之后、foo 之前')).then(
+    (resolve) => console.log(resolve)
+  );
 
-	bar();
+  bar();
 };
 
 test();
