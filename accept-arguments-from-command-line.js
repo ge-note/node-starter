@@ -12,7 +12,7 @@ const args = process.argv.slice(2);
 // node accept-arguments-from-command-line.js --name=joe
 console.log(args); // ['name=joe']
 
-console.log(args[0]); // name=ge
+console.log(args[0]); // name=joe
 
 /**
  * 获取解析后的参数
