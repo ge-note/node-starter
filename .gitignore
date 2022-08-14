@@ -4,10 +4,10 @@ node_modules
 # Logs
 *.log
 
-# Temp directories
-.temp
-.tmp
-.cache
+# Temp directories or files
+*.temp
+*.tmp
+*.cache
 
 # Yarn
 **/.yarn/cache
