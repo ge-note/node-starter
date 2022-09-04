@@ -21,17 +21,28 @@
     }
   </style>
   <body>
-    <div id="clock">clock html</div>
+    <div id="clock"></div>
     <script>
       const clock = document.getElementById('clock');
+      clock.innerHTML = getTime();
+
       setInterval(() => {
+        clock.innerHTML = getTime();
+      }, 1000);
+
+      // 获取时间
+      function getTime() {
         const now = new Date();
         const hour = now.getHours();
         const minute = now.getMinutes();
         const second = now.getSeconds();
+        return `${padZero(hour)} : ${padZero(minute)} : ${padZero(second)}`;
+      }
 
-        clock.innerHTML = `${hour} : ${minute} : ${second}`;
-      }, 1000);
+      // 补0
+      function padZero(num) {
+        return num < 9 ? `0${num}` : num;
+      }
     </script>
   </body>
 </html>
