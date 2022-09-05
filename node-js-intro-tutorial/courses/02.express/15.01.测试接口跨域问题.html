@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/3.6.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <button id="btnGet">GET</button>
+    <button id="btnPost">POST</button>
+    <button id="btnDelete">DELETE</button>
+    <button id="btnJsonp">JSONP</button>
+  </body>
+
+  <script>
+    $(function () {
+      // 测试 GET 请求
+      $('#btnGet').on('click', function () {
+        $.ajax({
+          type: 'GET',
+          url: 'http://127.0.0.1:3000/api/get',
+          data: {
+            name: 'zs',
+            age: 20,
+          },
+          success: function (res) {
+            console.log('GET res: ', res);
+          },
+        });
+      });
+
+      // 测试 POST 请求
+      $('#btnPost').on('click', function () {
+        $.ajax({
+          type: 'POST',
+          url: 'http://127.0.0.1:3000/api/post',
+          data: {
+            bookName: '三国演义',
+            author: '罗贯中',
+          },
+          success: function (res) {
+            console.log('POST res: ', res);
+          },
+        });
+      });
+
+      // 测试 DELETE 请求
+      $('#btnDelete').on('click', function () {
+        $.ajax({
+          type: 'DELETE',
+          url: 'http://127.0.0.1:3000/api/delete',
+          success: function (res) {
+            console.log('DELETE res: ', res);
+          },
+        });
+      });
+
+      // 测试 JSONP
+      $('#btnJsonp').on('click', function () {
+        $.ajax({
+          type: 'GET',
+          url: 'http://127.0.0.1:3000/api/jsonp',
+          dataType: 'jsonp', // 注意传类型
+          success: function (res) {
+            console.log('JSONP res: ', res);
+          },
+        });
+      });
+    });
+  </script>
+</html>
