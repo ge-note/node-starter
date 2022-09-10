@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const userRouter = require('./router/user');
 const joi = require('joi');
+const expressJWT = require('express-jwt');
+const config = require('./config');
 
 // 创建服务器实例对象
 const app = express();
@@ -31,15 +33,28 @@ app.use((req, res, next) => {
   next();
 });
 
+// 配置解析 token 的中间件
+// 注意：一定要在路由之前
+app.use(
+  expressJWT({
+    secret: config.jwtSecretKey,
+  }).unless({
+    path: [/^\/api\//],
+  })
+);
+
 // 使用用户路由模块
 app.use('/api', userRouter);
 
 // 定义错误处理中间件
 // 注意：在路由之后
 app.use((err, req, res, next) => {
-  // 数据验证失败
+  // 捕获客户端提交表单数据验证失败错误
   // 注意：一定要 return，否则会执行后面的 res.cc()，由于 express 不允许出现两个 res.send()，因此会报错
   if (err instanceof joi.ValidationError) return res.cc(err);
+
+  // 捕获身份认证失败错误
+  if (err.name === 'UnauthorizedError') return res.cc('身份认证失败');
 
   // 未知错误
   res.cc(err);

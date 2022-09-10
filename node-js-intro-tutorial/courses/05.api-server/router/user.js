@@ -15,6 +15,6 @@ const router = express.Router();
 router.post('/register', expressJoi(registerLoginSchema), userHandler.register);
 
 // 登录
-router.post('/login', userHandler.login);
+router.post('/login', expressJoi(registerLoginSchema), userHandler.login);
 
 module.exports = router;
