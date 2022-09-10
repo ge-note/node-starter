@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const userRouter = require('./router/user');
+const joi = require('joi');
 
 // 创建服务器实例对象
 const app = express();
@@ -32,6 +33,17 @@ app.use((req, res, next) => {
 
 // 使用用户路由模块
 app.use('/api', userRouter);
+
+// 定义错误处理中间件
+// 注意：在路由之后
+app.use((err, req, res, next) => {
+  // 数据验证失败
+  // 注意：一定要 return，否则会执行后面的 res.cc()，由于 express 不允许出现两个 res.send()，因此会报错
+  if (err instanceof joi.ValidationError) return res.cc(err);
+
+  // 未知错误
+  res.cc(err);
+});
 
 app.listen(3000, () => {
   console.log('Api-Server running at http://127.0.0.1:3000');

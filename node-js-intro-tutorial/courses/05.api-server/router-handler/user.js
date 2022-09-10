@@ -13,10 +13,6 @@ exports.register = (req, res) => {
   // 获取客户端提交的用户信息
   const userInfo = req.body;
 
-  // 检验表单中的数据
-  if (!userInfo.username || !userInfo.password)
-    return res.cc('用户名或密码不正确');
-
   // 校验用户名是否存在
   const sql = `select * from ev_users where username=?`;
   db.query(sql, userInfo.username, (err, results) => {
