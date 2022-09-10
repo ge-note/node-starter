@@ -7,6 +7,8 @@ const password = joi
   .string()
   .pattern(/^[\S]{6,12}$/)
   .required();
+// dataUri() 指的是 base64 格式数据 uri
+const avatar = joi.string().dataUri().required();
 
 // 验证规则对象 - 更新用户信息
 exports.updateUserInfoSchema = {
@@ -25,5 +27,12 @@ exports.updatePwdSchema = {
     // join.not(join.ref('oldPwd)) 表示 newPwd 的值不能和 oldPwd 的值相同
     // join.concat() 用于合并 join.not(join.ref('oldPwd)) 和 password 这两条规则
     newPwd: joi.not(joi.ref('oldPwd')).concat(password),
+  },
+};
+
+// 验证规则对象 - 更新头像
+exports.updateAvatarSchema = {
+  body: {
+    avatar,
   },
 };

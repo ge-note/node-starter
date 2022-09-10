@@ -4,6 +4,7 @@ const userInfoHandler = require('../router-handler/user-info');
 const {
   updateUserInfoSchema,
   updatePwdSchema,
+  updateAvatarSchema,
 } = require('../schema/user-info');
 
 const router = express.Router();
@@ -23,6 +24,13 @@ router.post(
   '/update-pwd',
   expressJoi(updatePwdSchema),
   userInfoHandler.updatePwd
+);
+
+// 更新用户头像路由
+router.post(
+  '/update-avatar',
+  expressJoi(updateAvatarSchema),
+  userInfoHandler.updateAvatar
 );
 
 module.exports = router;
