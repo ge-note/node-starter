@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/3.6.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>首页</h1>
+    <button id="logoutBtn">退出登录</button>
+
+    <script>
+      $(function () {
+        $.ajax({
+          type: 'GET',
+          url: 'http://127.0.0.1:3000/api/username',
+          success: function (res) {
+            if (res.status === 1) {
+              alert('您还未登录或登录态已失效，请重新登录');
+              location.href = './login.html';
+            }
+          },
+        });
+
+        $('#logoutBtn').on('click', function () {
+          $.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:3000/api/logout',
+            success: function (res) {
+              if (res.status === 0) {
+                location.href = '/login.html';
+              }
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

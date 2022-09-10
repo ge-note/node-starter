@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/3.6.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>登录页</h1>
+    <form id="form" onsubmit="return false" action="##" method="post">
+      <label for="username">账号：</label>
+      <input type="text" name="username" />
+
+      <label for="password">密码：</label>
+      <input type="password" name="password" />
+
+      <button onclick="login()">登录</button>
+    </form>
+  </body>
+  <script>
+    function login() {
+      $.ajax({
+        method: 'post',
+        url: 'http://127.0.0.1:3000/api/login',
+        dataType: 'json',
+        data: $('#form').serialize(),
+        success: function (res) {
+          if (res.status === 0) {
+            location.href = './index.html';
+          }
+        },
+      });
+    }
+  </script>
+</html>
