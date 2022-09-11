@@ -3,6 +3,8 @@ const db = require('../db');
 
 // 新增文章
 exports.addArticle = (req, res) => {
+  if (!req.file) return res.cc('未上传封面图');
+
   // 文章信息
   const articleInfo = {
     ...req.body, // 标题、内容、状态、所属分类 id
@@ -66,6 +68,8 @@ exports.deleteArticleById = (req, res) => {
 
 // 更新文章
 exports.updateArticle = (req, res) => {
+  if (!req.file) return res.cc('未上传封面图');
+
   const selectSql = `select * from ev_articles where id=? and is_delete=0`;
   db.query(selectSql, req.body.id, (err, results) => {
     if (err) return res.cc(err);
