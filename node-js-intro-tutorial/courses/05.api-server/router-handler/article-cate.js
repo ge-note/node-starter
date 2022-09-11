@@ -48,3 +48,16 @@ exports.addArticleCate = (req, res) => {
     });
   });
 };
+
+// 根据 id 删除文章分类
+exports.deleteArticleCateById = (req, res) => {
+  // 标记删除
+  const sql = `update ev_article_cates set is_delete=1 where id=?`;
+  db.query(sql, req.params.id, (err, results) => {
+    if (err) return res.cc(err);
+
+    if (results.affectedRows !== 1) return res.cc('删除文章分类失败');
+
+    res.cc('删除文章分类成功', 0);
+  });
+};
