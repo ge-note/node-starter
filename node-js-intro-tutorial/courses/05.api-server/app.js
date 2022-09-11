@@ -6,6 +6,7 @@ const config = require('./config');
 const userRouter = require('./router/user');
 const userInfoRouter = require('./router/user-info');
 const articleCateRouter = require('./router/article-cate');
+const articleRouter = require('./router/article');
 
 // 创建服务器实例对象
 const app = express();
@@ -52,6 +53,8 @@ app.use('/api', userRouter);
 app.use('/my', userInfoRouter);
 // 使用文章分类模块
 app.use('/my/article', articleCateRouter);
+// 使用文章模块
+app.use('/my/article', articleRouter);
 
 // 定义错误处理中间件
 // 注意：在路由之后
