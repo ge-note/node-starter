@@ -35,3 +35,19 @@ exports.getArticles = (req, res) => {
     });
   });
 };
+
+// 根据 id 获取文章详情
+exports.getArticleById = (req, res) => {
+  const sql = `select * from ev_articles where id=? and is_delete=0`;
+  db.query(sql, req.params.id, (err, results) => {
+    if (err) return res.cc(err);
+
+    if (results.length !== 1) return res.cc('获取文章详情失败');
+
+    res.send({
+      status: 0,
+      message: '获取文章详情成功',
+      data: results[0],
+    });
+  });
+};

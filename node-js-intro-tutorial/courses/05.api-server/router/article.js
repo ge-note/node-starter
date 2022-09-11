@@ -1,7 +1,7 @@
 const express = require('express');
 const expressJoi = require('@escook/express-joi');
 const articleHandler = require('../router-handler/article');
-const { addArticleSchema } = require('../schema/article');
+const { addArticleSchema, getArticleSchema } = require('../schema/article');
 
 // 解析 multipart/form-data 数据
 const multer = require('multer');
@@ -23,5 +23,8 @@ router.post(
 
 // 获取文章列表路由
 router.get('/list', articleHandler.getArticles);
+
+// 根据 id 获取文章详情路由
+router.get('/:id', expressJoi(getArticleSchema), articleHandler.getArticleById);
 
 module.exports = router;

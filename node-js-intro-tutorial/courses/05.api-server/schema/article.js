@@ -14,3 +14,9 @@ exports.addArticleSchema = {
     cate_id,
   },
 };
+
+exports.getArticleSchema = {
+  params: {
+    id,
+  },
+};
