@@ -5,6 +5,7 @@ const {
   addCateSchema,
   deleteCateSchema,
   getCateSchema,
+  updateCateSchema,
 } = require('../schema/article-cate');
 
 const router = express.Router();
@@ -31,6 +32,13 @@ router.get(
   '/cate/:id',
   expressJoi(getCateSchema),
   articleCateHandler.getArticleCateById
+);
+
+// 更新文章分类路由
+router.post(
+  '/update-cate',
+  expressJoi(updateCateSchema),
+  articleCateHandler.updateArticleCate
 );
 
 module.exports = router;

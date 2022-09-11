@@ -77,3 +77,53 @@ exports.getArticleCateById = (req, res) => {
     });
   });
 };
+
+// 更新文章分类
+exports.updateArticleCate = (req, res) => {
+  // 校验名称与别名是否被占用
+  // 注意：需要查询其他分类的数据
+  const selectSql = `select * from ev_article_cates where id<>? and (name=? or alias=?)`;
+  db.query(
+    selectSql,
+    [req.body.id, req.body.name, req.body.alias],
+    (err, results) => {
+      if (err) return res.cc(err);
+
+      // 分类名称和别名都被占用
+      if (results.length === 2)
+        return res.cc('分类名称和别名被占用，请更换后重试');
+      if (
+        results.length === 1 &&
+        req.body.name === results[0].name &&
+        req.body.alias === results[0].alias
+      )
+        return res.cc('分类名称和别名被占用，请更换后重试');
+
+      // 分类名称或者别名被占用
+      if (results.length === 1 && req.body.name === results[0].name)
+        return res.cc('分类名称被占用，请更换后重试');
+      if (results.length === 1 && req.body.alias === results[0].alias)
+        return res.cc('分类别名被占用，请更换后重试');
+
+      // 更新分类
+      const updateSql = `update ev_article_cates set ? where id=?`;
+      db.query(
+        updateSql,
+        [
+          {
+            name: req.body.name,
+            alias: req.body.alias,
+          },
+          req.body.id,
+        ],
+        (err, results) => {
+          if (err) return res.cc(err);
+
+          if (results.affectedRows !== 1) return res.cc('更新文章分类失败');
+
+          res.cc('更新文章分类成功', 0);
+        }
+      );
+    }
+  );
+};

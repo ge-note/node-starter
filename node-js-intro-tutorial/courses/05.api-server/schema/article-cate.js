@@ -22,3 +22,11 @@ exports.getCateSchema = {
     id,
   },
 };
+
+exports.updateCateSchema = {
+  body: {
+    id,
+    name,
+    alias,
+  },
+};
