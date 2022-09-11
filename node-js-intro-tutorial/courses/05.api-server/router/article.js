@@ -5,6 +5,7 @@ const {
   addArticleSchema,
   getArticleSchema,
   deleteArticleSchema,
+  updateArticleSchema,
 } = require('../schema/article');
 
 // 解析 multipart/form-data 数据
@@ -36,6 +37,14 @@ router.get(
   '/delete/:id',
   expressJoi(deleteArticleSchema),
   articleHandler.deleteArticleById
+);
+
+// 更新文章
+router.post(
+  '/update',
+  upload.single('cover_img'),
+  expressJoi(updateArticleSchema),
+  articleHandler.updateArticle
 );
 
 module.exports = router;

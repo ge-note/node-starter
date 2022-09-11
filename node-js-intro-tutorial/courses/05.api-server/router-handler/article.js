@@ -63,3 +63,34 @@ exports.deleteArticleById = (req, res) => {
     res.cc('删除文章成功', 0);
   });
 };
+
+// 更新文章
+exports.updateArticle = (req, res) => {
+  const selectSql = `select * from ev_articles where id=? and is_delete=0`;
+  db.query(selectSql, req.body.id, (err, results) => {
+    if (err) return res.cc(err);
+
+    if (results.length !== 1) return res.cc('未找到该文章');
+
+    const updateSql = `update ev_articles set ? where id=?`;
+    db.query(
+      updateSql,
+      [
+        {
+          ...req.body, // 标题、内容、状态、所属分类 id
+          cover_img: path.join('/public/uploads', req.file.filename), // 文章封面存放路径
+          pub_date: new Date(), // 发布时间
+          author_id: req.user.id, // 作者 id
+        },
+        req.body.id,
+      ],
+      (err, results) => {
+        if (err) return res.cc(err);
+
+        if (results.affectedRows !== 1) return '更新文章失败';
+
+        res.cc('更新文章成功', 0);
+      }
+    );
+  });
+};

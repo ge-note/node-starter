@@ -26,3 +26,13 @@ exports.deleteArticleSchema = {
     id,
   },
 };
+
+exports.updateArticleSchema = {
+  body: {
+    id,
+    title,
+    content,
+    state,
+    cate_id,
+  },
+};
