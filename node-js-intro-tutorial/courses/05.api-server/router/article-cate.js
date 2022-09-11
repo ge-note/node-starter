@@ -1,7 +1,11 @@
 const express = require('express');
 const expressJoi = require('@escook/express-joi');
 const articleCateHandler = require('../router-handler/article-cate');
-const { addCateSchema, deleteCateSchema } = require('../schema/article-cate');
+const {
+  addCateSchema,
+  deleteCateSchema,
+  getCateSchema,
+} = require('../schema/article-cate');
 
 const router = express.Router();
 
@@ -20,6 +24,13 @@ router.get(
   '/delete-cate/:id',
   expressJoi(deleteCateSchema),
   articleCateHandler.deleteArticleCateById
+);
+
+// 根据 id 获取文章分类路由
+router.get(
+  '/cate/:id',
+  expressJoi(getCateSchema),
+  articleCateHandler.getArticleCateById
 );
 
 module.exports = router;

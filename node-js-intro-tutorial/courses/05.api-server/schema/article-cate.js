@@ -16,3 +16,9 @@ exports.deleteCateSchema = {
     id,
   },
 };
+
+exports.getCateSchema = {
+  params: {
+    id,
+  },
+};
