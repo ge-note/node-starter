@@ -1,14 +1,17 @@
-const path = require('path');
 const db = require('../db');
+const { saveUploadFile } = require('../utils/save-upload-file');
 
 // 新增文章
-exports.addArticle = (req, res) => {
+exports.addArticle = async (req, res) => {
   if (!req.file) return res.cc('未上传封面图');
+
+  // 保存文件并获取文件路径
+  const filePath = await saveUploadFile(req.file);
 
   // 文章信息
   const articleInfo = {
     ...req.body, // 标题、内容、状态、所属分类 id
-    cover_img: path.join('/public/uploads', req.file.filename), // 文章封面存放路径
+    cover_img: filePath, // 文章封面存放路径
     pub_date: new Date(), // 发布时间
     author_id: req.user.id, // 作者 id
   };
@@ -67,8 +70,11 @@ exports.deleteArticleById = (req, res) => {
 };
 
 // 更新文章
-exports.updateArticle = (req, res) => {
+exports.updateArticle = async (req, res) => {
   if (!req.file) return res.cc('未上传封面图');
+
+  // 保存文件并获取文件路径
+  const filePath = await saveUploadFile(req.file);
 
   const selectSql = `select * from ev_articles where id=? and is_delete=0`;
   db.query(selectSql, req.body.id, (err, results) => {
@@ -82,7 +88,7 @@ exports.updateArticle = (req, res) => {
       [
         {
           ...req.body, // 标题、内容、状态、所属分类 id
-          cover_img: path.join('/public/uploads', req.file.filename), // 文章封面存放路径
+          cover_img: filePath, // 文章封面存放路径
           pub_date: new Date(), // 发布时间
           author_id: req.user.id, // 作者 id
         },
