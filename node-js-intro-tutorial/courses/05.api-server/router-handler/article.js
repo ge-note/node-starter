@@ -21,3 +21,17 @@ exports.addArticle = (req, res) => {
     res.cc('新增文章成功', 0);
   });
 };
+
+// 获取文章列表
+exports.getArticles = (req, res) => {
+  const sql = `select * from ev_articles where is_delete=0 order by id asc`;
+  db.query(sql, (err, results) => {
+    if (err) return res.cc(err);
+
+    res.send({
+      status: 0,
+      message: '获取文章列表成功',
+      data: results,
+    });
+  });
+};
