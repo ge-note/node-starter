@@ -11,6 +11,9 @@ const articleRouter = require('./router/article');
 // 创建服务器实例对象
 const app = express();
 
+// 将 public 目录下的所有文件对外提供
+app.use(express.static('./public'));
+
 // 配置解决跨域中间件
 app.use(cors());
 

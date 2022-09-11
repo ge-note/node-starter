@@ -32,7 +32,7 @@ exports.saveUploadFile = (file) => {
               if (err) reject(err);
 
               // 返回文件路径
-              resolve(path.join('/public/uploads', fileName));
+              resolve(path.join('/uploads', fileName));
             }
           );
         }
