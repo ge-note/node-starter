@@ -20,3 +20,9 @@ exports.getArticleSchema = {
     id,
   },
 };
+
+exports.deleteArticleSchema = {
+  params: {
+    id,
+  },
+};
