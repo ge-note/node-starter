@@ -5,6 +5,7 @@ const expressJWT = require('express-jwt');
 const config = require('./config');
 const userRouter = require('./router/user');
 const userInfoRouter = require('./router/user-info');
+const articleCateRouter = require('./router/article-cate');
 
 // 创建服务器实例对象
 const app = express();
@@ -49,6 +50,8 @@ app.use('/api', userRouter);
 // 使用用户信息模块
 // 注意：以 /my 开头的接口，都需要有身份认证
 app.use('/my', userInfoRouter);
+// 使用文章分类模块
+app.use('/my/article', articleCateRouter);
 
 // 定义错误处理中间件
 // 注意：在路由之后
